@@ -2,6 +2,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:wellnesspresentation/objectbox.g.dart';
 
 @Entity()
+@Sync()
 class User {
   @Id(assignable: true)
   int id;
