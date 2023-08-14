@@ -82,7 +82,6 @@ class SelectionScreen extends StatelessWidget {
 
   const SelectionScreen(this.selectedItem, {super.key});
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -92,39 +91,53 @@ class SelectionScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 60, width: 40), // Increase the distance from the screen edge
             Text(
-              'What remedy type would you like to use to treat: \n $selectedItem',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+              'What remedy type would you like to use to treat:\n$selectedItem',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green[200],
+                padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 20), // Set the same padding for all buttons
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  HerbalScreen()),
+                  MaterialPageRoute(builder: (context) => HerbalScreen()),
                 );
               },
-              child: const Text('Herbal'),
+              child: const Text('Herbal', style: TextStyle(fontSize: 18)), // Increase the font size
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green[200],
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20), // Set the same padding for all buttons
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  DrugScreen()),
+                  MaterialPageRoute(builder: (context) => DrugScreen()),
                 );
               },
-              child: const Text('Drug'),
+              child: const Text('Drug', style: TextStyle(fontSize: 18)), // Increase the font size
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green[200],
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20), // Set the same padding for all buttons
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  TreatmentScreen()),
+                  MaterialPageRoute(builder: (context) => TreatmentScreen()),
                 );
               },
-              child: const Text('Treatment'),
+              child: const Text('Treatment', style: TextStyle(fontSize: 18)), // Increase the font size
             ),
           ],
         ),

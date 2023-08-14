@@ -8,16 +8,27 @@ class RemedyPromptOneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Select an Option'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 20), // Gap between text and buttons
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'What am I treating:',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+            SizedBox(height: 60), // Gap between text and buttons
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[200],
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 23), // Set padding to make buttons same size
               ),
               onPressed: () {
                 Navigator.push(
@@ -25,12 +36,13 @@ class RemedyPromptOneScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const ConditionScreen()),
                 );
               },
-              child: const Text('Condition'),
+              child: const Text('Condition', style: TextStyle(fontSize: 18)),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[200],
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20), // Set padding to make buttons same size
               ),
               onPressed: () {
                 Navigator.push(
@@ -38,7 +50,7 @@ class RemedyPromptOneScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const SymptomsScreen()),
                 );
               },
-              child: const Text('Symptoms'),
+              child: const Text('Symptom', style: TextStyle(fontSize: 18)),
             ),
           ],
         ),

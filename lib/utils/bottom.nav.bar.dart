@@ -10,7 +10,7 @@ import 'package:wellnesspresentation/Screens/home.screen.view.dart';
 import 'package:wellnesspresentation/Screens/Library/item.detail.view.dart';
 import 'package:wellnesspresentation/Screens/Library/item.listing.view.dart';
 import 'package:wellnesspresentation/Models/item.entity.dart';
-import 'package:wellnesspresentation/Screens/Profile/profile.view.screen.dart'; // Make sure to import your Product class
+import 'package:wellnesspresentation/Screens/Profile/profile.view.screen.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({Key? key}) : super(key: key);
@@ -24,18 +24,18 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   late Product _defaultProduct;
 
   final List<Widget> _screens = [
-    HomePage(), //Home
+    HomePage(), // Home
     const RemedyPromptOneScreen(), // Remedy
-    SearchPage(),//Search
-    reviewScreen(),//Review
-    ItemListingPage(),// Library
+    SearchPage(), // Search
+    reviewScreen(), // Review
+    ItemListingPage(), // Library
     ProfileScreen(), // Profile
     AddProductPage(),
     DeleteProductPage(selectedProducts: const []), // Pass an empty list as default value
     EditProductPage(productId: 0), // Pass a default value for productId
     const EditOptionsPage(selectedProducts: []),
-    ProductDetailPage(product: Product(id: 0, name: '', description: '', usages: [])), // Pass a default Product
-
+    ProductDetailPage(
+        product: Product(id: 0, name: '', description: '', usages: [])), // Pass a default Product
   ];
 
   @override
@@ -53,17 +53,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Holistic Health')),
+        title: Text('Holistic Health'),
+        centerTitle: true, // Center the title
         backgroundColor: Colors.green[200],
-        leading: IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
-            );
-          },
-        ),
       ),
       body: IndexedStack(
         index: _selectedIndex,
