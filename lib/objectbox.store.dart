@@ -2,7 +2,6 @@ import 'package:wellnesspresentation/objectbox.g.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-import 'package:wellnesspresentation/Models/item.entity.dart';
 
 class ObjectBoxService {
   static late Store _store;
@@ -10,17 +9,18 @@ class ObjectBoxService {
 
   static Future<void> openObjectBoxStore() async {
     final appDocumentDir = await getApplicationDocumentsDirectory();
-    final directory = Directory(appDocumentDir.path + '/objectbox');
-    if (!directory.existsSync()) {
-      directory.createSync();
+    final databaseDirectoryPath = appDocumentDir.path + '/objectbox';
+
+    if (!Directory(databaseDirectoryPath).existsSync()) {
+      Directory(databaseDirectoryPath).createSync();
     }
 
-    _store = Store(getObjectBoxModel(), directory: directory.path);
+    _store = Store(getObjectBoxModel(), directory: databaseDirectoryPath);
     _storeOpened = true;
 
     // Create Admin instance if available
     if (Admin.isAvailable()) {
-      final admin = Admin(_store); // Create the Admin instance
+// Create the Admin instance
       // (Optional) Close at some later point.
       // admin.close();
     }
@@ -33,5 +33,6 @@ class ObjectBoxService {
       throw Exception("ObjectBox store has not been initialized.");
     }
   }
+
 // Other methods for managing products, queries, etc.
 }

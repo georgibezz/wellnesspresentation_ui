@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wellnesspresentation/objectbox.store.dart';
 import 'package:wellnesspresentation/objectbox.g.dart';
+import 'package:wellnesspresentation/objectbox.store.dart';
 import 'package:wellnesspresentation/Models/item.entity.dart';
-
-class SearchResult {
-  final String itemName;
-  final String itemId;
-
-  SearchResult(this.itemName, this.itemId);
-}
+import 'package:wellnesspresentation/Screens/Library/item.detail.view.dart'; // Import ProductDetailPage
 
 class SearchPage extends StatefulWidget {
   @override
@@ -17,7 +11,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
-  List<SearchResult> _searchResults = [];
+  List<Product> _searchResults = [];
 
   void _performSearch() async {
     final query = _searchController.text;
@@ -30,12 +24,9 @@ class _SearchPageState extends State<SearchPage> {
 
     final productBox = ObjectBoxService.objectBoxStore.box<Product>();
     final nameResults = await productBox.query(Product_.name.contains(query)).build().find();
-    final descriptionResults = await productBox.query(Product_.description.contains(query)).build().find();
-
-    final combinedResults = [...nameResults, ...descriptionResults];
 
     setState(() {
-      _searchResults = combinedResults.map((product) => SearchResult(product.name, product.id.toString())).toList();
+      _searchResults = nameResults;
     });
   }
 
@@ -74,12 +65,12 @@ class _SearchPageState extends State<SearchPage> {
               itemBuilder: (context, index) {
                 final result = _searchResults[index];
                 return ListTile(
-                  title: Text(result.itemName),
+                  title: Text(result.name),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SearchItemDetailPage(data: result.itemName),
+                        builder: (context) => ProductDetailPage(product: result),
                       ),
                     );
                   },
@@ -88,24 +79,6 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SearchItemDetailPage extends StatelessWidget {
-  final String data;
-
-  const SearchItemDetailPage({required this.data, Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Result Detail'),
-      ),
-      body: Center(
-        child: Text('Detail for: $data'),
       ),
     );
   }
